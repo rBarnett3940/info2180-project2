@@ -1,3 +1,6 @@
+<?php
+    session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -50,10 +53,10 @@
                             <?php foreach ($contacts as $contact): ?>
                             <tr>
                                 <td><strong><?= $contact['title'].'. '.$contact['firstname'].' '.$contact['lastname']; ?></strong></td>
-                                <td><?= $contact['email']; ?></td>
-                                <td><?= $contact['company']; ?></td>
-                                <td><?= $contact['type']; ?></td>
-                                <td><a href="#">View</a></td>
+                                <td class="lgt"><?= $contact['email']; ?></td>
+                                <td class="lgt"><?= $contact['company']; ?></td>
+                                <td><p class="<?= $b = $contact['type']=='Sales Lead' ? "sl" : "sp" ?>"><?= strtoupper($contact['type']); ?></p></td>
+                                <td><a href="contact.php?cid=<?= $contact['id']; ?>">View</a></td>
                             </tr>
                             <?php endforeach; ?>
                         </tbody>

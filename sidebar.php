@@ -1,6 +1,6 @@
 <aside>
     <div class="home">
-        <a href="#">
+        <a href="dashboard.php">
             <button class="btn home-btn">               
                 <img  src="home.png">
                 <span>Home</span>
