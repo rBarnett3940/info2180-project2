@@ -50,20 +50,10 @@ CREATE TABLE Notes(
 );
 
 INSERT INTO Users (firstname,lastname,password,email,role,created_at) VALUES
-'John','Snow','password123','admin@project2.com','Admin',NOW();
+('Jan','Levinson','passwordJAN','jan.levinson@paper.co','Member',NOW()),
+('David','Wallace','passwordDAV','david.wallace@paper.co','Admin',NOW()),
+('Andy','Bernard','passwordAND','andy.bernard@paper.co','Member',NOW()),
+('Darryl','Philbin','passwordDAR','darrly.philbin@paper.co','Member',NOW()),
+('Erin','Hannon','passwordERI','erin.hannon@paper.co','Member',NOW());
 
-INSERT INTO Users (firstname,lastname,password,email,role,created_at) VALUES
-'Jan','Levinson','passwordJAN','jan.levinson@paper.co','Member',NOW();
-
-INSERT INTO Users (firstname,lastname,password,email,role,created_at) VALUES
-'David','Wallace','passwordDAV','david.wallace@paper.co','Admin',NOW();
-
-INSERT INTO Users (firstname,lastname,password,email,role,created_at) VALUES
-'Andy','Bernard','passwordAND','andy.bernard@paper.co','Member',NOW();
-
-INSERT INTO Users (firstname,lastname,password,email,role,created_at) VALUES
-'Darryl','Philbin','passwordDAR','darrly.philbin@paper.co','Member',NOW();
-
-INSERT INTO Users (firstname,lastname,password,email,role,created_at) VALUES
-'Erin','Hannon','passwordERI','erin.hannon@paper.co','Member',NOW();
 
