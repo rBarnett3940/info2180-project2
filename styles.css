@@ -1,0 +1,76 @@
+:root{
+    --darkblue: #1f2937;
+    --grey: #f0f0f0;
+    --defaultFontFamily: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji;
+
+}
+
+.container{
+    display: grid;
+    grid-template-columns: 1fr 5fr;
+}
+
+body{
+    font-family: var(--defaultFontFamily);
+    background-color: var(--grey);
+    height: 100%;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    background-color: var(--darkblue);
+    color: #ffffff;
+    font-size: 8px;
+    padding: 10px;
+    grid-column: 1/3;
+}
+
+header img{
+    width: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+aside{
+    grid-column: 1;
+    background-color: white;
+    padding: 20px;
+    height: 100%;
+    box-shadow: 2px 0px 5px #c9c9c9;
+}
+
+aside a{
+    text-decoration: none;
+}
+
+aside img{
+    width: 25px;
+}
+
+aside hr{
+    padding-left: 5px;
+}
+
+aside button{
+    background-color: white;
+    border: 0px;
+    padding: 8px;
+    padding-left: 10px;
+    width:100%;
+}
+
+aside button:hover{
+    background-color: var(--grey);
+}
+
+aside .btn{
+    display: flex;
+    align-items: center;
+}
+
+aside span{
+    padding-left: 5px;
+    font-size: 15px;
+}
