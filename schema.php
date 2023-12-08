@@ -1,22 +1,35 @@
 <?php
-// Assuming $conn is your database connection
+// Database connection
+$host = 'localhost';
+$username = 'root';
+$password = '';
+$dbname = 'dolphine_crm';
+$conn = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8mb4", $username, $password);
 
+// User details
 $firstname = "John";
 $lastname = "Snow";
-$password = "password123"; // Replace with the actual password
+$password = "password123"; 
 $email = "admin@project2.com";
 $role = "Admin";
-$created_at = date('Y-m-d H:i:s'); // Current date and time
+$created_at = date('Y-m-d H:i:s');  
 
 // Hash the password using password_hash
 $hashed_password = password_hash($password, PASSWORD_BCRYPT);
 
-// Prepare and execute the SQL query to insert the user into the users table
-$stmt = $conn->prepare("INSERT INTO users (firstname, lastname, password, email, role, created_at) VALUES (?, ?, ?, ?, ?, ?)");
-$stmt->bind_param("ssssss", $firstname, $lastname, $hashed_password, $email, $role, $created_at);
-$stmt->execute();
-$stmt->close();
+//  SQL query to insert the user into the users table
+try {
+    $stmt = $conn->prepare("INSERT INTO users (firstname, lastname, password, email, role, created_at) VALUES (?, ?, ?, ?, ?, ?)");
+    $stmt->execute([$firstname, $lastname, $hashed_password, $email, $role, $created_at]);
 
-// Close the database connection
-$conn->close();
+    echo "User inserted successfully!";
+} catch (PDOException $e) {
+    echo "Error inserting user: " . $e->getMessage();
+}
+
 ?>
+
+
+
+
+
