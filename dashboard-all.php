@@ -4,10 +4,11 @@ $host = 'localhost';
 $username = 'root';
 $password = '';
 $dbname = 'dolphin_crm';
-$class1 = 'fl';
+$class1 = 'nt';
 $class2 = 'fl';
-$class3 = 'nt';
+$class3 = 'fl';
 $class4 = 'fl';
+
 
 
 try {
@@ -20,8 +21,11 @@ try {
     die($e->getMessage());
 }
 
-$statement = $conn->query("SELECT * FROM Contacts WHERE type = 'Support'");
+$statement = $conn->query("SELECT * FROM Contacts");
 $contacts = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+
+
 
 ?>
 
@@ -43,8 +47,16 @@ $contacts = $statement->fetchAll(PDO::FETCH_ASSOC);
         <td class="lgt"><?= $contact['email']; ?></td>
         <td class="lgt"><?= $contact['company']; ?></td>
         <td><p class="<?= $b = $contact['type']=='Sales Lead' ? "sl" : "sp" ?>"><?= strtoupper($contact['type']); ?></p></td>
-        <td><a href="contact.php?cid=<?= $contact['id']; ?>">View</a></td>
+        <td><button class="view-btn" onclick="loadContactDetails()">View</button></td>
     </tr>
     <?php endforeach; ?>
 </tbody>
 </table>
+
+
+<script>
+    function loadContactDetails() {
+        alert("Checking");
+    }
+</script>
+

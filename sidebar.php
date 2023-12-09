@@ -1,35 +1,27 @@
 <aside>
     <div class="home">
-        <a href="dashboard.php">
-            <button class="btn home-btn">               
-                <img  src="home.png">
-                <span>Home</span>
-            </button>
-        </a>
+        <button class="btn home-btn" id="hm">               
+            <img  src="home.png">
+            <span>Home</span>
+        </button>
     </div>
     <div class="newContact">
-        <a href="#">
-            <button class="btn newContact-btn">               
-                <img  src="newContact.png">
-                <span>New Contact</span>
-            </button>
-        </a>
+        <button class="btn newContact-btn" id="nc">               
+            <img  src="newContact.png">
+            <span>New Contact</span>
+        </button>
     </div>
     <div class="users">
-        <a href="#">
-            <button class="btn users-btn">               
-                <img  src="users.png">
-                <span>Users</span>
-            </button>
-        </a>
+        <button class="btn users-btn" id="us">               
+            <img  src="users.png">
+            <span>Users</span>
+        </button>
     </div>
     <hr>
     <div class="logout">
-        <a href="#">
-            <button class="btn logout-btn">               
-                <img  src="logout.png">
-                <span>Logout</span>
-            </button>
-        </a>
+        <button class="btn logout-btn" id="lg">               
+            <img  src="logout.png">
+            <span>Logout</span>
+        </button>
     </div>
 </aside>
