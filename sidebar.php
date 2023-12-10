@@ -2,7 +2,7 @@
     <div class="home">
         <a href="dashboard.php">
             <button class="btn home-btn">               
-                <img  src="home.png">
+                <img  src="media/home.png">
                 <span>Home</span>
             </button>
         </a>
@@ -10,7 +10,7 @@
     <div class="newContact">
         <a href="#">
             <button class="btn newContact-btn">               
-                <img  src="newContact.png">
+                <img  src="media/newContact.png">
                 <span>New Contact</span>
             </button>
         </a>
@@ -18,7 +18,7 @@
     <div class="users">
         <a href="#">
             <button class="btn users-btn">               
-                <img  src="users.png">
+                <img  src="media/users.png">
                 <span>Users</span>
             </button>
         </a>
@@ -27,7 +27,7 @@
     <div class="logout">
         <a href="#">
             <button class="btn logout-btn">               
-                <img  src="logout.png">
+                <img  src="media/logout.png">
                 <span>Logout</span>
             </button>
         </a>

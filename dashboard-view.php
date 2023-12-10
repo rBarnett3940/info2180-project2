@@ -1,5 +1,6 @@
 <?php
-    session_start();
+global $class4, $class2, $class1, $class3, $contacts;
+session_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -17,14 +18,14 @@
                 <div class="heading">
                     <h1>Dashboard</h1>
                     <button class="addContact-btn">               
-                        <img src="plus.png" alt="plus image">
+                        <img src="media/plus.png" alt="plus image">
                         <span>Add Contact</span>
                     </button>
                 </div>
                 <br>
                 <div class="contact-table">
                     <div class="filter">
-                        <img src="filter.png" alt="filter icon">
+                        <img src="media/filter.png" alt="filter icon">
                         <p>Filter By:</p>
                         <a href="dashboard.php">
                             <button class="<?= $class1; ?>">All</button>
