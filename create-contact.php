@@ -25,9 +25,9 @@
                     <form id="contactForm" action="save-contact.php" method="post">
                         <label for="title">Title:</label>
                         <select id="title" name="title">
-                            <option value="mr">Mr</option>
-                            <option value="mrs">Mrs</option>
-                            <option value="miss">Miss</option>
+                            <option value="Mr">Mr</option>
+                            <option value="Mrs">Mrs</option>
+                            <option value="Miss">Miss</option>
                         </select>
                         <br>
 
@@ -44,23 +44,23 @@
                         <br>
 
                         <label for="telephone">Telephone:</label>
-                        <input type="tel" id="telephone" name="telephone">
+                        <input type="tel" id="telephone" name="telephone" required>
                         <br>
 
                         <label for="company">Company:</label>
-                        <input type="text" id="company" name="company">
+                        <input type="text" id="company" name="company" required>
                         <br>
 
                         <label for="Type">Type:</label>
-                        <select id="Type" name="Type">
-                            <option value="SalesLead">Sales Lead</option>
+                        <select id="Type" name="Type" required>
+                            <option value="Sales Lead">Sales Lead</option>
                             <option value="Support">Support</option>
 
                         </select>
                         <br>
 
                         <label for="assignedTo">Assigned To:</label>
-                        <select id="assignedTo" name="assignedTo">
+                        <select id="assignedTo" name="assignedTo" required>
                             <?php
                             // Assuming you have a database connection established
 
@@ -77,11 +77,26 @@
 
                             $result = $conn->query("SELECT id, firstname, lastname FROM users");
 
+                            // if ($result->num_rows > 0) {
+                            //     while ($row = $result->fetch_assoc()) {
+                            //         echo "<option value='" . $row['id'] . "'>" . $row['firstname'] . " " . $row['lastname'] . "</option>";
+                            //     }
+                            // }
+
+                            
+                            //sanitized using htmlspecialchars
                             if ($result->num_rows > 0) {
                                 while ($row = $result->fetch_assoc()) {
-                                    echo "<option value='" . $row['id'] . "'>" . $row['firstname'] . " " . $row['lastname'] . "</option>";
+                                    $id = htmlspecialchars($row['id'], ENT_QUOTES);
+                                    $firstname = htmlspecialchars($row['firstname'], ENT_QUOTES);
+                                    $lastname = htmlspecialchars($row['lastname'], ENT_QUOTES);
+                            
+                                    echo "<option value='$id'>$firstname $lastname</option>";
                                 }
                             }
+                            
+
+                            
 
                             $conn->close();
                             ?>
@@ -96,31 +111,40 @@
             <?php include 'sidebar.php'; ?>
         </div>
     </body>
+
+
+
+    
     <script>
         function submitForm() {
             var form = document.getElementById('contactForm');
             var formData = new FormData(form);
+
+            // Check if any required fields are empty
+            var requiredFields = form.querySelectorAll('[required]');
+            for (var i = 0; i < requiredFields.length; i++) {
+                if (!requiredFields[i].value.trim()) {
+                    alert('Please fill in all required fields');
+                    return; // Prevent form submission
+                }
+            }
+
 
             fetch(form.action, {
                 method: 'POST',
                 body: formData
             })
                 .then(response => {
-                    // Handle the response status
                     if (!response.ok) {
                         throw new Error('Network response was not ok');
                     }
-                    // Continue processing the response
-                    return response.text(); // or response.blob(), response.json(), etc.
+                    return response.text();
                 })
                 .then(data => {
-                    // Handle the response data
                     alert(data);
                     form.reset();
-                    // You can update the UI, show a success message, etc.
                 })
                 .catch(error => {
-                    // Handle errors
                     console.error('Error:', error);
                 });
         }

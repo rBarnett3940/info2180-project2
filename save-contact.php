@@ -36,11 +36,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo "Error: " . $sql . "<br>" . $conn->error;
     }
 
-    if ($conn->query($sql) === TRUE) {
-        $response = ["success" => true, "message" => "Record inserted successfully"];
-    } else {
-        $response = ["success" => false, "message" => "Error: " . $sql . "<br>" . $conn->error];
-    }
+//    if ($conn->query($sql) === TRUE) {
+//        $response = ["success" => true, "message" => "Record inserted successfully"];
+//    } else {
+//        $response = ["success" => false, "message" => "Error: " . $sql . "<br>" . $conn->error];
+//    }
 
 
     $conn->close();
