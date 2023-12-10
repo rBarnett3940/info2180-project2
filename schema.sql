@@ -64,4 +64,5 @@ INSERT INTO Contacts (title,firstname,lastname,email,telephone,company, type, as
 ('Mrs','Sarah','Palmer','spalm@gmail.com',8761524367,'JPS','Support',4081, 4081, NOW(), NOW()),
 ('Mr','Hugh','Brown','hughbrown34@gmail.com',8769870456,'NWC','Sales Lead',4080, 4081, NOW(), NOW()),
 ('Ms','Paula','White','whitepaul34@yahoo.com',8761345267,'Flow','Support',4082, 4080, NOW(), NOW()),
+('Mr','John','Brown','jbrown59@yahoo.com',8765673296,'Pricesmart','Sales Lead',4085, 4084, NOW(), NOW()),
 ('Mrs','Kimberly','Knight','kknight@gmail.com',8760081256,'KFC','Support',4082, 4081, NOW(), NOW());

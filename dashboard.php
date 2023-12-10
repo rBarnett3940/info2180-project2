@@ -103,6 +103,25 @@
         }
 
 
+        function assignedToMe(){
+            var hr = new XMLHttpRequest();
+            var url = "dashboard.atm.php";
+            hr.onreadystatechange = function(){
+                if(hr.readyState == XMLHttpRequest.DONE){
+                    if(hr.status == 200){
+                        var tabl = hr.responseText;
+                        var result = document.getElementById("tb");
+                        result.innerHTML = tabl;
+                    } else {
+                        alert("Error!!!")
+                    }
+                }
+            };
+            hr.open("GET", url, true);
+            hr.send();
+        }
+
+
         function all_d(){
             var hr = new XMLHttpRequest();
             var url = "dashboard-all.php";
@@ -131,6 +150,37 @@
             var url = "contact.php?contact_id=" + contactId2 + "&switch_btn=" + btn_s;
             console.log(targetButton);
             console.log(contactId2);
+            console.log(url);
+
+
+            //document.getElementById("contact-table").style.border = 0;
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == XMLHttpRequest.DONE) {
+                    if (xhr.status == 200) {
+                        // Handle the response as needed
+                        var responseData = xhr.responseText;
+                        // You can update a div or perform other actions with the data
+                        document.getElementById('tb').innerHTML = responseData;
+                    } else {
+                        alert("Error loading contact details!");
+                    }
+                }
+            };
+
+            xhr.open("GET", url, true);
+            xhr.send();
+        }
+
+        function atm(){
+            var xhr = new XMLHttpRequest();
+            var targetButton = event.target.closest('.assign-btn');
+            console.log(targetButton);
+            var contactId2 = targetButton.getAttribute('data-content-id');
+            console.log(contactId2);
+            var btn_s = 2;
+            var url = "contact.php?contact_id=" + contactId2 + "&switch_btn=" + btn_s;
+            
             console.log(url);
 
 

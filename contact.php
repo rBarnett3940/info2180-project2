@@ -1,5 +1,8 @@
 <?php
 // Database connection
+
+session_start();
+
 $host = 'localhost';
 $username = 'root';
 $password = '';
@@ -51,6 +54,20 @@ $statement3 = $conn->query("SELECT firstname, lastname FROM Users WHERE id = $cb
 $user2 = $statement3->fetchAll(PDO::FETCH_ASSOC);
 
 
+$at = $user2[0]["firstname"].' '.$user2[0]["lastname"];
+
+if ($btn_s == 2){
+    $id = $_SESSION['user_id'];
+    $statement5 = $conn->query("UPDATE Contacts SET assigned_to = $id WHERE id = $contactId");
+    $statement6 = $conn->query("SELECT * FROM Contacts WHERE id = $contactId");
+    $user4 = $statement6->fetchAll(PDO::FETCH_ASSOC);
+    $chid = $user4[0]["assigned_to"];
+    $statement7 = $conn->query("SELECT * FROM Users WHERE id = $chid");
+    $user5 = $statement7->fetchAll(PDO::FETCH_ASSOC);
+    $at = $user5[0]["firstname"].' '.$user5[0]["lastname"];
+}
+
+
 if ($contact_det[0]["type"] == "Support" && $btn_s == 1){
     $swButton = 'Support';
 } else if ($contact_det[0]["type"] == "Sales Lead" and $btn_s == 1){
@@ -74,7 +91,7 @@ if ($contact_det[0]["type"] == "Support" && $btn_s == 1){
         </div>
     </div>
     <div class="tbtn">
-        <button class="btn assign-btn">               
+        <button class="btn assign-btn" onclick="atm()" data-content-id="<?= $contactId?>">               
             <img  src="hand.png">
             <span>Assign to me</span>
         </button>
@@ -100,7 +117,7 @@ if ($contact_det[0]["type"] == "Support" && $btn_s == 1){
     </div>
     <div class="assigned_to">
         <h4>Assigned to</h4>
-        <p><?= $user2[0]["firstname"].' '.$user2[0]["lastname"]; ?></p>
+        <p><?= $at ?></p>
     </div>
 </div>
 <br>
