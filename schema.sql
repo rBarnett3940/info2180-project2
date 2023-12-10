@@ -35,7 +35,12 @@ CREATE TABLE Contacts (
     `created_by` INT NOT NULL DEFAULT 0, -- Modify default value as needed
     `created_at` DATETIME DEFAULT CURRENT_TIMESTAMP,
     `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+<<<<<<< HEAD
 )ENGINE=MyISAM AUTO_INCREMENT=1080 DEFAULT CHARSET=utf8mb4;
+
+=======
+);
+>>>>>>> 38e6158ae8ff1df86a7d773f4c4a2c4ebeeeb55b
 
 
 --
@@ -48,6 +53,7 @@ CREATE TABLE Notes (
   `comment` TEXT,
   `created_by` INT NOT NULL, -- Adjust as needed
   `created_at`DATETIME DEFAULT CURRENT_TIMESTAMP
+<<<<<<< HEAD
 )ENGINE=MyISAM AUTO_INCREMENT=8080 DEFAULT CHARSET=utf8mb4;
 
 
@@ -58,6 +64,18 @@ INSERT INTO Users (firstname,lastname,password,email,role,created_at) VALUES
 ('Darryl','Philbin','passwordDAR','darrly.philbin@paper.co','Member',NOW()),
 ('Erin','Hannon','passwordERI','erin.hannon@paper.co','Member',NOW());
 
+=======
+);
+
+
+INSERT INTO Users (firstname,lastname,password,email,role,created_at) VALUES
+('Jan','Levinson','passwordJAN','jan.levinson@paper.co','Member',NOW()),
+('David','Wallace','passwordDAV','david.wallace@paper.co','Admin',NOW()),
+('Andy','Bernard','passwordAND','andy.bernard@paper.co','Member',NOW()),
+('Darryl','Philbin','passwordDAR','darrly.philbin@paper.co','Member',NOW()),
+('Erin','Hannon','passwordERI','erin.hannon@paper.co','Member',NOW());
+
+>>>>>>> 38e6158ae8ff1df86a7d773f4c4a2c4ebeeeb55b
 
 INSERT INTO Contacts (title,firstname,lastname,email,telephone,company, type, assigned_to, created_by,created_at,updated_at) VALUES
 ('Mr','Paul','Williams','paul.williams@gmail.com',8761234567,'Digicel','Sales Lead',4080, 4080, NOW(), NOW()),
