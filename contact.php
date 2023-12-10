@@ -28,6 +28,7 @@ $btn_s = 0;
 
 $contactId = isset($_GET['contact_id']) ? $_GET['contact_id'] : null;
 $btn_s = isset($_GET['switch_btn']) ? $_GET['switch_btn'] : null;
+$comment = isset($_GET['comment']) ? $_GET['comment'] : null;
 
 $sl = "Sales Lead";
 $sp = "Support";
@@ -78,6 +79,40 @@ if ($contact_det[0]["type"] == "Support" && $btn_s == 1){
     $swButton = 'Sales Lead';
 }
 
+
+if (!empty($comment)) {
+    $comment = test_input($comment);
+    $sId = $_SESSION['user_id'];
+    $sql = "INSERT INTO Notes (contact_id, comment, created_by, created_at) VALUES (:contactId, :comment, :sId, NOW())";
+    $stat = $conn->query("UPDATE Contacts SET updated_at = NOW() WHERE id = $contactId");
+
+    // Prepare the PDO statement
+    $stmt = $conn->prepare($sql);
+
+    // Bind parameters
+    $stmt->bindParam(':contactId', $contactId, PDO::PARAM_INT);
+    $stmt->bindParam(':comment', $comment, PDO::PARAM_STR);
+    $stmt->bindParam(':sId', $sId, PDO::PARAM_INT);
+
+    // Execute the statement
+    $stmt->execute();
+    //$statement4 = $conn->query("INSERT INTO Notes (contact_id, comment, created_by, created_at) VALUES($contactId, $comment, NOW(), $sId)");
+}
+
+
+function test_input($data) {
+    $data = trim($data);
+    $data = stripslashes($data);
+    $data = htmlspecialchars($data);
+    return $data;
+}
+
+
+$statement8 = $conn->query("SELECT id, contact_id, comment, created_by, CONCAT(MONTHNAME(created_at),' ',DATE_FORMAT(created_at, '%m, %Y at %l%p')) AS created_at  FROM Notes WHERE contact_id = $contactId");
+$notes = $statement8->fetchAll(PDO::FETCH_ASSOC);
+
+
+
 ?>
 
 
@@ -91,11 +126,11 @@ if ($contact_det[0]["type"] == "Support" && $btn_s == 1){
         </div>
     </div>
     <div class="tbtn">
-        <button class="btn assign-btn" onclick="atm()" data-content-id="<?= $contactId?>">               
+        <button class="btn assign-btn atm-btn" onclick="atm()" data-content-id="<?= $contactId?>">               
             <img  src="hand.png">
             <span>Assign to me</span>
         </button>
-        <button class="btn switch-btn" onclick="switchBtn()" data-content-id="<?= $contactId?>">               
+        <button class="btn switch-btn sw-btn" onclick="switchBtn()" data-content-id="<?= $contactId?>">               
             <img  src="swap.png">
             <span>Switch to <?= $swButton?></span>
         </button>
@@ -124,15 +159,31 @@ if ($contact_det[0]["type"] == "Support" && $btn_s == 1){
 <div class="notes">
     <div class="hnotes">
         <img  src="notes.png">
-        <h3>Assign to me</h3>
+        <h3>Notes</h3>
     </div>
     <hr>
+    <div class="cNotes">
+        <?php foreach ($notes as $note): ?>
+            <?php 
+                $uId = $note['created_by'];
+                $statement9 = $conn->query("SELECT firstname, lastname FROM Users WHERE id = $uId");
+                $usr = $statement9->fetchAll(PDO::FETCH_ASSOC);   
+
+                ?>
+            <h4><?= $usr[0]["firstname"].' '.$usr[0]["lastname"]; ?></h4>
+            <p><?= $note['comment']; ?></p>
+            <p><?= $note['created_at']; ?></p>
+            <br>
+        <?php endforeach; ?>
+    </div>
     <div class="txt">
-        <form method="post">
-            <p><label for="note">Add a note about <?= $contact_det[0]["firstname"]?></label></p><br>
+            <h4><label for="note">Add a note about <?= $contact_det[0]["firstname"]?></label></h4><br>
             <textarea id="note" name="note">
             
             </textarea>
-        </form>
+            <br>
+            <div id="nBut">
+                <button class="btn noteBtn" onclick="addNote()" contact-id="<?= $contactId ?>">Add Note</button>
+            </div>
     </div>
 </div>

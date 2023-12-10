@@ -1,0 +1,36 @@
+#newuser
+{
+    background-color: rgb(79, 79, 235);
+    font-family: Arial, Helvetica, sans-serif;
+    border-radius: 0.313rem;
+    width: 4.688rem;
+    padding: 0.625rem;
+    margin:0.5rem,0;
+    color: white;
+    border: none;
+}
+input
+{
+border-radius: 0.313rem;
+width: 35.625rem;
+padding: 0.75rem 1.25rem;
+margin: 0.5rem 0rem;
+box-sizing: border-box;
+}
+
+.container
+{
+    display:flex;
+    flex-direction: row;
+    background-color: white;
+    padding: 0.625rem;
+    border-radius: 0.938rem;
+}
+#role
+{
+    border-radius: 0.313rem;
+    width: 35.625rem;
+    padding: 0.75rem 1.25rem;
+    margin: 0.5rem 0rem;
+    box-sizing: border-box;
+}

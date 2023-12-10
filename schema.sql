@@ -35,12 +35,7 @@ CREATE TABLE Contacts (
     `created_by` INT NOT NULL DEFAULT 0, -- Modify default value as needed
     `created_at` DATETIME DEFAULT CURRENT_TIMESTAMP,
     `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-<<<<<<< HEAD
 )ENGINE=MyISAM AUTO_INCREMENT=1080 DEFAULT CHARSET=utf8mb4;
-
-=======
-);
->>>>>>> 38e6158ae8ff1df86a7d773f4c4a2c4ebeeeb55b
 
 
 --
@@ -53,7 +48,6 @@ CREATE TABLE Notes (
   `comment` TEXT,
   `created_by` INT NOT NULL, -- Adjust as needed
   `created_at`DATETIME DEFAULT CURRENT_TIMESTAMP
-<<<<<<< HEAD
 )ENGINE=MyISAM AUTO_INCREMENT=8080 DEFAULT CHARSET=utf8mb4;
 
 
@@ -64,18 +58,6 @@ INSERT INTO Users (firstname,lastname,password,email,role,created_at) VALUES
 ('Darryl','Philbin','passwordDAR','darrly.philbin@paper.co','Member',NOW()),
 ('Erin','Hannon','passwordERI','erin.hannon@paper.co','Member',NOW());
 
-=======
-);
-
-
-INSERT INTO Users (firstname,lastname,password,email,role,created_at) VALUES
-('Jan','Levinson','passwordJAN','jan.levinson@paper.co','Member',NOW()),
-('David','Wallace','passwordDAV','david.wallace@paper.co','Admin',NOW()),
-('Andy','Bernard','passwordAND','andy.bernard@paper.co','Member',NOW()),
-('Darryl','Philbin','passwordDAR','darrly.philbin@paper.co','Member',NOW()),
-('Erin','Hannon','passwordERI','erin.hannon@paper.co','Member',NOW());
-
->>>>>>> 38e6158ae8ff1df86a7d773f4c4a2c4ebeeeb55b
 
 INSERT INTO Contacts (title,firstname,lastname,email,telephone,company, type, assigned_to, created_by,created_at,updated_at) VALUES
 ('Mr','Paul','Williams','paul.williams@gmail.com',8761234567,'Digicel','Sales Lead',4080, 4080, NOW(), NOW()),
@@ -84,3 +66,20 @@ INSERT INTO Contacts (title,firstname,lastname,email,telephone,company, type, as
 ('Ms','Paula','White','whitepaul34@yahoo.com',8761345267,'Flow','Support',4082, 4080, NOW(), NOW()),
 ('Mr','John','Brown','jbrown59@yahoo.com',8765673296,'Pricesmart','Sales Lead',4085, 4084, NOW(), NOW()),
 ('Mrs','Kimberly','Knight','kknight@gmail.com',8760081256,'KFC','Support',4082, 4081, NOW(), NOW());
+
+
+INSERT INTO Notes (contact_id,comment,created_by,created_at) VALUES
+(1080, 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,
+molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum
+numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium
+optio, eaque rerum! Provident similique accusantium nemo autem. Veritatis
+obcaecati tenetur iure eius earum ut molestias architecto voluptate aliquam
+nihil, eveniet aliquid culpa officia aut! Impedit sit sunt quaerat, odit,
+tenetur error, harum nesciunt ipsum debitis quas aliquid. Reprehenderit,
+quia. Quo neque error repudiandae fuga? Ipsa laudantium molestias eos 
+sapiente officiis modi at sunt excepturi expedita sint? Sed quibusdam
+recusandae alias error harum maxime adipisci amet laborum.',4085,NOW()),
+(1080, 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,
+molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum
+numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium
+optio, eaque rerum!',4085,NOW());

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    
+    <title>New User</title>
+    <link rel="stylesheet" href="newuser.css">
+    <script src="newUser.js"></script>
+</head>
+<body>
+    <header>
+        <h1>New User</h1>
+    </header>
+
+    <div id="user-form">
+        <form action="newuser.php" method="post">
+            <label for="fname">First Name</label>
+            <input type="text" name="fname" id="fname" placeholder="Jane" required><br><br>
+            <label for="lname">Last Name</label>
+            <input type="text" name="lname" id="lname" placeholder="Doe" required><br><br>
+            <label for="email" >Email</label>
+            <input type="email" name="email" id="email" placeholder="janedoe@example.com" required><br><br>
+            <label for="password">Password</label>
+            <input type="password" name="password" id="password" required><br><br>
+            <label for="role">Role</label>
+            <select name="role" id="role">
+                <option value="Member">Member</option>
+                <option value="Admin">Admin</option>                
+            </select><br><br>
+
+            <button type="submit" id="submit-btn" class="btn">Save</button>
+        </form>
+        <p class="error-message"></p>
+
+        
+    </div>
+</body>
+</html>

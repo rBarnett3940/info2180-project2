@@ -26,6 +26,7 @@ try {
 
 $id = $_SESSION['user_id'];
 
+
 $statement = $conn->query("SELECT * FROM Contacts WHERE assigned_to = $id");
 $contacts = $statement->fetchAll(PDO::FETCH_ASSOC);
 
