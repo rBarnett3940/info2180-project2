@@ -120,5 +120,38 @@
             hr.open("GET", url, true);
             hr.send();
         }
+
+
+
+        function switchBtn() {
+            var xhr = new XMLHttpRequest();
+            var targetButton = event.target.closest('.switch-btn');
+            var contactId2 = targetButton.getAttribute('data-content-id');
+            var btn_s = 1;
+            var url = "contact.php?contact_id=" + contactId2 + "&switch_btn=" + btn_s;
+            console.log(targetButton);
+            console.log(contactId2);
+            console.log(url);
+
+
+            //document.getElementById("contact-table").style.border = 0;
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == XMLHttpRequest.DONE) {
+                    if (xhr.status == 200) {
+                        // Handle the response as needed
+                        var responseData = xhr.responseText;
+                        // You can update a div or perform other actions with the data
+                        document.getElementById('tb').innerHTML = responseData;
+                    } else {
+                        alert("Error loading contact details!");
+                    }
+                }
+            };
+
+            xhr.open("GET", url, true);
+            xhr.send();
+        }
+
     </script>
 </html>

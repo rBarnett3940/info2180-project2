@@ -63,7 +63,7 @@ $contacts = $statement->fetchAll(PDO::FETCH_ASSOC);
             <td class="lgt"><?= $contact['email']; ?></td>
             <td class="lgt"><?= $contact['company']; ?></td>
             <td><p class="<?= $b = $contact['type']=='Sales Lead' ? "sl" : "sp" ?>"><?= strtoupper($contact['type']); ?></p></td>
-            <td><a href="contact.php?cid=<?= $contact['id']; ?>">View</a></td>
+            <td><button class="view-btn" onclick="loadContactDetails()" data-contact-id="<?= $contact['id']; ?>">View</button></td>
         </tr>
         <?php endforeach; ?>
         </tbody>
