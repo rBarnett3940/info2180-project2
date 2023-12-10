@@ -21,22 +21,15 @@ try {
     die($e->getMessage());
 }
 
-$id = $_GET['cid'];
+$contactId = isset($_GET['contact_id']) ? $_GET['contact_id'] : null;
 
-$statement = $conn->query("SELECT * FROM Contacts WHERE id = 1081");
+
+$statement = $conn->query("SELECT * FROM Contacts WHERE id = $contactId");
 $contact_det = $statement->fetchAll(PDO::FETCH_ASSOC);
-var_dump($contact_det);
 
 
 ?>
 
-<?php
-// view-contact.php
-$contactId = $_GET['id'];
-error_log("Contact ID: $contactId");
-
-// Rest of your code...
-?>
 
 <script src="dashboard.js"></script>
 

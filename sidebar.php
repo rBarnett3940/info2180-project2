@@ -1,6 +1,6 @@
 <aside>
     <div class="home">
-        <button class="btn home-btn" id="hm">               
+        <button class="btn home-btn" id="hm" onclick="all_d()">               
             <img  src="home.png">
             <span>Home</span>
         </button>

@@ -10,38 +10,115 @@
         <title>Dashboard</title>
         <link rel="stylesheet" href="styles.css?v=<?php echo time(); ?>" type="text/css" />
         <link rel="stylesheet" href="contact-styles.css?v=<?php echo time(); ?>" type="text/css" />
-        <script src="dashboard.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     </head>
     <body>
         <div class="container">
             <?php include 'header.php'; ?>
             <section id="main-container">
-                <div class="heading">
-                    <h1>Dashboard</h1>
-                    <button class="addContact-btn">               
-                        <img src="plus.png" alt="plus image">
-                        <span>Add Contact</span>
-                    </button>
-                </div>
-                <br>
-                <div class="contact-table">
-                    <div class="filter">
-                        <img src="filter.png" alt="filter icon">
-                        <p>Filter By:</p>
-                        <div id="fetchval" value="Please">
-                            <button class="<?= $class1; ?>" id="all" name="All">All</button>
-                            <button class="<?= $class2; ?>" id="sl" name="Sales Lead">Sales Leads</button>
-                            <button class="<?= $class3; ?>" id="sp" name="Support">Support</button>
-                            <button class="<?= $class4; ?>" id="as" name="Assigned to me">Assigned to me</button>
-                        </div>
-                    </div>
-                    <div id="tb"></div>
-                </div>
+                <div id="tb"></div>
             </section>
             <?php include 'sidebar.php'; ?>
         </div>
     </body>
+    <script>
+        var hr = new XMLHttpRequest();
+    var url = "dashboard-all.php";
+    hr.onreadystatechange = function(){
+        if(hr.readyState == XMLHttpRequest.DONE){
+            if(hr.status == 200){
+                var tabl = hr.responseText;
+                var result = document.getElementById("tb");
+                result.innerHTML = tabl;
+                
+            } else {
+                alert("Error!!!")
+            }
+        }
+    };
+    hr.open("GET", url, true);
+    hr.send();
+
+
+        function loadContactDetails() {
+            var xhr = new XMLHttpRequest();
+            var targetButton = event.target.closest('.view-btn');
+            var contactId = targetButton.getAttribute('data-contact-id');
+            var url = "contact.php?contact_id=" + contactId;
+
+            //document.getElementById("contact-table").style.border = 0;
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == XMLHttpRequest.DONE) {
+                    if (xhr.status == 200) {
+                        // Handle the response as needed
+                        var responseData = xhr.responseText;
+                        // You can update a div or perform other actions with the data
+                        document.getElementById('tb').innerHTML = responseData;
+                    } else {
+                        alert("Error loading contact details!");
+                    }
+                }
+            };
+
+            xhr.open("GET", url, true);
+            xhr.send();
+        }
+
+
+        function salesLead(){
+            var hr = new XMLHttpRequest();
+            var url = "dashboard-sl.php";
+            hr.onreadystatechange = function(){
+                if(hr.readyState == XMLHttpRequest.DONE){
+                    if(hr.status == 200){
+                        var tabl = hr.responseText;
+                        var result = document.getElementById("tb");
+                        result.innerHTML = tabl;
+                    } else {
+                        alert("Error!!!")
+                    }
+                }
+            };
+            hr.open("GET", url, true);
+            hr.send();
+        }
+
+        function support(){
+            var hr = new XMLHttpRequest();
+            var url = "dashboard-s.php";
+            hr.onreadystatechange = function(){
+                if(hr.readyState == XMLHttpRequest.DONE){
+                    if(hr.status == 200){
+                        var tabl = hr.responseText;
+                        var result = document.getElementById("tb");
+                        result.innerHTML = tabl;
+                    } else {
+                        alert("Error!!!")
+                    }
+                }
+            };
+            hr.open("GET", url, true);
+            hr.send();
+        }
+
+
+        function all_d(){
+            var hr = new XMLHttpRequest();
+            var url = "dashboard-all.php";
+            hr.onreadystatechange = function(){
+                if(hr.readyState == XMLHttpRequest.DONE){
+                    if(hr.status == 200){
+                        var tabl = hr.responseText;
+                        var result = document.getElementById("tb");
+                        result.innerHTML = tabl;
+                    } else {
+                        alert("Error!!!")
+                    }
+                }
+            };
+            hr.open("GET", url, true);
+            hr.send();
+        }
+    </script>
 </html>
-
-
