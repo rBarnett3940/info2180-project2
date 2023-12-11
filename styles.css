@@ -285,3 +285,38 @@ th {
     border-radius: 8px;
     color: white;
 }
+
+
+.form-container{
+    position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); 
+  padding-top: 400px; 
+}
+
+.form-container input{
+    padding: 10px;
+    width: 50vh;
+    border: 1px solid #555555;
+    border-radius: 4px;
+}
+
+.form-container button{
+    background-color: var(--blue);
+    padding: 10px;
+    width: 54vh;
+    border: 0;
+    border-radius: 4px;
+    color: white;
+}
+
+.form-container p{
+    text-align: center;
+}
+
+.lgp h1{
+    color: black;
+    text-align: center;
+    font-size: 46px;
+}

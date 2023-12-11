@@ -29,6 +29,8 @@ $users = $statement->fetchAll(PDO::FETCH_ASSOC);
 
 ?>
 
+<?php if(session_status() == 'PHP_SESSION_ACTIVE'){?>
+
 <div class="heading" id="heading">
     <h1 id="hdr">Users</h1>
     <button class="addContact-btn" id="lf-btn" onclick="addUser()">               
@@ -59,6 +61,8 @@ $users = $statement->fetchAll(PDO::FETCH_ASSOC);
     </tbody>
     </table>
 </div>
+
+<?php } ?>
 
 
 

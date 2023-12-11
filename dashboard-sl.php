@@ -27,9 +27,12 @@ $contacts = $statement->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 
+<?php if(session_status() == 'PHP_SESSION_ACTIVE'){?>
+
+
 <div class="heading" id="heading">
     <h1 id="hdr">Dashboard</h1>
-    <button class="addContact-btn" id="lf-btn">               
+    <button class="addContact-btn" id="lf-btn" id="nCt" onclick="nCt()">               
         <img src="plus.png" alt="plus image">
         <span>Add Contact</span>
     </button>
@@ -69,3 +72,6 @@ $contacts = $statement->fetchAll(PDO::FETCH_ASSOC);
         </tbody>
     </table>
 </div>
+
+
+<?php } ?>

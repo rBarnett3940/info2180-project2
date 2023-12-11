@@ -23,21 +23,21 @@
     </body>
     <script>
         var hr = new XMLHttpRequest();
-    var url = "dashboard-all.php";
-    hr.onreadystatechange = function(){
-        if(hr.readyState == XMLHttpRequest.DONE){
-            if(hr.status == 200){
-                var tabl = hr.responseText;
-                var result = document.getElementById("tb");
-                result.innerHTML = tabl;
-                
-            } else {
-                alert("Error!!!")
+        var url = "dashboard-all.php";
+        hr.onreadystatechange = function(){
+            if(hr.readyState == XMLHttpRequest.DONE){
+                if(hr.status == 200){
+                    var tabl = hr.responseText;
+                    var result = document.getElementById("tb");
+                    result.innerHTML = tabl;
+                    
+                } else {
+                    alert("Error!!!")
+                }
             }
-        }
-    };
-    hr.open("GET", url, true);
-    hr.send();
+        };
+        hr.open("GET", url, true);
+        hr.send();
 
 
         function loadContactDetails() {
@@ -334,8 +334,23 @@
         }
 
 
-        function logout(){
-            window.location.href = 'login.php';
+        function logout() {
+            // Make an AJAX request to logout.php
+            fetch('logout.php')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        // Redirect to the login page if the logout was successful
+                        window.location.href = 'login.php';
+                    } else {
+                        // Handle any errors if needed
+                        console.error('Logout failed.');
+                    }
+                })
+                .catch(error => {
+                    // Handle AJAX errors if needed
+                    console.error('AJAX error:', error);
+                });
         }
 
     </script>

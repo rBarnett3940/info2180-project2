@@ -52,7 +52,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
     $response = [
-        "success" => $conn->query($sql) === TRUE,
         "message" => $conn->query($sql) === TRUE ? "Record inserted successfully" : "Error: " . $sql . "<br>" . $conn->error
     ];
 
@@ -70,7 +69,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 ?>
 
 
-
+<?php if(session_status() == 'PHP_SESSION_ACTIVE'){?>
 
 
 <div class="form">
@@ -144,3 +143,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <input type="button" value="Submit" onclick="submitForm()">
     </form>
 </div>
+
+
+<?php } ?>
