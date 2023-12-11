@@ -1,3 +1,4 @@
+
 <?php
     session_start();
 ?>
@@ -9,6 +10,20 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge" />
         <title>New Contact</title>
         <link rel="stylesheet" href="styles.css?v=<?php echo time(); ?>" type="text/css" />
+        <link rel="stylesheet" href="create-contact.css?v=<?php echo time(); ?>" type="text/css" />
+        <style>
+            .form {
+                display: flex;
+                justify-content: space-between;
+            }
+
+
+            .column {
+                flex: 1;
+                margin-right: 20px; /* Adjust the margin as needed */
+            }
+        </style>
+
     </head>
     <body>
         <div class="container">
@@ -19,93 +34,189 @@
                     <h1>New Contact</h1>
                 </div>
                 <br>
-
-                <div class="form">
-
+                <div class="content">
                     <form id="contactForm" action="save-contact.php" method="post">
-                        <label for="title">Title:</label>
-                        <select id="title" name="title">
-                            <option value="Mr">Mr</option>
-                            <option value="Mrs">Mrs</option>
-                            <option value="Miss">Miss</option>
-                        </select>
-                        <br>
 
-                        <label for="firstName">First Name:</label>
-                        <input type="text" id="firstName" name="firstName" required>
-                        <br>
+                        <div class="user-details">
+                            <div class="input-box">
+                                <span class="details"> Title </span>
+                                <!-- <label for="title">Title:</label> -->
+                                <select id="title" name="title">
+                                    <option value="Mr">Mr</option>
+                                    <option value="Mrs">Mrs</option>
+                                    <option value="Miss">Miss</option>
+                                </select>
+                            </div>
 
-                        <label for="lastName">Last Name:</label>
-                        <input type="text" id="lastName" name="lastName" required>
-                        <br>
+                            <div class="input-box">
+                                <span class="details"></span>
+                            </div>
 
-                        <label for="email">Email:</label>
-                        <input type="email" id="email" name="email" required>
-                        <br>
+                            <div class="input-box">
+                                <span class="details"> First Name:</span>
+                                <input type="text" id="firstName" name="firstName" required>
+                            </div>
 
-                        <label for="telephone">Telephone:</label>
-                        <input type="tel" id="telephone" name="telephone" required>
-                        <br>
+                            <div class="input-box">
+                                <span class="details">Last Name: </span>
+                                <input type="text" id="lastName" name="lastName" required>
+                            </div>
 
-                        <label for="company">Company:</label>
-                        <input type="text" id="company" name="company" required>
-                        <br>
+                            <div class="input-box">
+                                <span class="details">Email: </span>
+                                <input type="email" id="email" name="email" required>
 
-                        <label for="Type">Type:</label>
-                        <select id="Type" name="Type" required>
-                            <option value="Sales Lead">Sales Lead</option>
-                            <option value="Support">Support</option>
+                            </div>
 
-                        </select>
-                        <br>
+                            <div class="input-box">
+                                <span class="details">Telephone:</span>
+                                <input type="tel" id="telephone" name="telephone" required>
 
-                        <label for="assignedTo">Assigned To:</label>
-                        <select id="assignedTo" name="assignedTo" required>
-                            <?php
-                            // Assuming you have a database connection established
+                            </div>
 
-                            $host = 'localhost';
-                            $username = 'root';
-                            $password = '';
-                            $database = 'dolphin_crm';
+                            <div class="input-box">
+                                <span class="details">Company:</span>
+                                <input type="text" id="company" name="company" required>
 
-                            $conn = new mysqli($host, $username, $password, $database);
+                            </div>
 
-                            if ($conn->connect_error) {
-                                die("Connection failed: " . $conn->connect_error);
-                            }
+                            <div class="input-box">
+                                <span class="details">Type:</span>
+                                <select id="Type" name="Type" required>
+                                    <option value="Sales Lead">Sales Lead</option>
+                                    <option value="Support">Support</option>
+                                </select>
+                            </div>
 
-                            $result = $conn->query("SELECT id, firstname, lastname FROM users");
+                            <div class="input-box">
+                                <span class="details"> Assigned To: </span>
+                                <select id="assignedTo" name="assignedTo" required>
+                                    <?php
+                                    // Assuming you have a database connection established
 
-                            // if ($result->num_rows > 0) {
-                            //     while ($row = $result->fetch_assoc()) {
-                            //         echo "<option value='" . $row['id'] . "'>" . $row['firstname'] . " " . $row['lastname'] . "</option>";
-                            //     }
-                            // }
+                                    $host = 'localhost';
+                                    $username = 'root';
+                                    $password = '';
+                                    $database = 'dolphin_crm';
 
-                            
-                            //sanitized using htmlspecialchars
-                            if ($result->num_rows > 0) {
-                                while ($row = $result->fetch_assoc()) {
-                                    $id = htmlspecialchars($row['id'], ENT_QUOTES);
-                                    $firstname = htmlspecialchars($row['firstname'], ENT_QUOTES);
-                                    $lastname = htmlspecialchars($row['lastname'], ENT_QUOTES);
-                            
-                                    echo "<option value='$id'>$firstname $lastname</option>";
-                                }
-                            }
-                            
+                                    $conn = new mysqli($host, $username, $password, $database);
 
-                            
+                                    if ($conn->connect_error) {
+                                        die("Connection failed: " . $conn->connect_error);
+                                    }
 
-                            $conn->close();
-                            ?>
-                        </select>
-                        <br>
+                                    $result = $conn->query("SELECT id, firstname, lastname FROM users");
 
-                        <input type="button" value="Submit" onclick="submitForm()">
+                                    //sanitized using htmlspecialchars
+                                    if ($result->num_rows > 0) {
+                                        while ($row = $result->fetch_assoc()) {
+                                            $id = htmlspecialchars($row['id'], ENT_QUOTES);
+                                            $firstname = htmlspecialchars($row['firstname'], ENT_QUOTES);
+                                            $lastname = htmlspecialchars($row['lastname'], ENT_QUOTES);
+
+                                            echo "<option value='$id'>$firstname $lastname</option>";
+                                        }
+                                    }
+
+                                    $conn->close();
+                                    ?>
+                                </select>
+                            </div>
+
+                            <div class="input-box">
+                                <span class="details"></span>
+                            </div>
+
+
+
+                            <div class="button">
+                                <input type="button" value="Submit" onclick="submitForm()">
+                            </div>
+
+
+
+                        </div>
                     </form>
                 </div>
+<!--                <div class="form">-->
+<!--                    <form id="contactForm" action="save-contact.php" method="post">-->
+<!--                        <div class="column">-->
+<!--                            <label for="title">Title:</label>-->
+<!--                            <select id="title" name="title">-->
+<!--                                <option value="Mr">Mr</option>-->
+<!--                                <option value="Mrs">Mrs</option>-->
+<!--                                <option value="Miss">Miss</option>-->
+<!--                            </select>-->
+<!--                            <br>-->
+<!---->
+<!--                            <label for="firstName">First Name:</label>-->
+<!--                            <input type="text" id="firstName" name="firstName" required>-->
+<!--                            <br>-->
+<!---->
+<!--                            <label for="lastName">Last Name:</label>-->
+<!--                            <input type="text" id="lastName" name="lastName" required>-->
+<!--                            <br>-->
+<!---->
+<!--                            <label for="email">Email:</label>-->
+<!--                            <input type="email" id="email" name="email" required>-->
+<!--                            <br>-->
+<!--                        </div>-->
+<!---->
+<!--                        <div class="column">-->
+<!--                            <label for="telephone">Telephone:</label>-->
+<!--                            <input type="tel" id="telephone" name="telephone" required>-->
+<!--                            <br>-->
+<!---->
+<!--                            <label for="company">Company:</label>-->
+<!--                            <input type="text" id="company" name="company" required>-->
+<!--                            <br>-->
+<!---->
+<!--                            <label for="Type">Type:</label>-->
+<!--                            <select id="Type" name="Type" required>-->
+<!--                                <option value="Sales Lead">Sales Lead</option>-->
+<!--                                <option value="Support">Support</option>-->
+<!--                            </select>-->
+<!--                            <br>-->
+<!---->
+<!--                            <label for="assignedTo">Assigned To:</label>-->
+<!--                            <select id="assignedTo" name="assignedTo" required>-->
+<!--                                --><?php
+//                                // Assuming you have a database connection established
+//
+//                                $host = 'localhost';
+//                                $username = 'root';
+//                                $password = '';
+//                                $database = 'dolphin_crm';
+//
+//                                $conn = new mysqli($host, $username, $password, $database);
+//
+//                                if ($conn->connect_error) {
+//                                    die("Connection failed: " . $conn->connect_error);
+//                                }
+//
+//                                $result = $conn->query("SELECT id, firstname, lastname FROM users");
+//
+//                                //sanitized using htmlspecialchars
+//                                if ($result->num_rows > 0) {
+//                                    while ($row = $result->fetch_assoc()) {
+//                                        $id = htmlspecialchars($row['id'], ENT_QUOTES);
+//                                        $firstname = htmlspecialchars($row['firstname'], ENT_QUOTES);
+//                                        $lastname = htmlspecialchars($row['lastname'], ENT_QUOTES);
+//
+//                                        echo "<option value='$id'>$firstname $lastname</option>";
+//                                    }
+//                                }
+//
+//                                $conn->close();
+//                                ?>
+<!--                            </select>-->
+<!--                            <br>-->
+<!---->
+<!--                            <input type="button" value="Submit" onclick="submitForm()">-->
+<!--                        </div>-->
+<!--                    </form>-->
+<!--                </div>-->
+
 
             </section>
             <?php include 'sidebar.php'; ?>
