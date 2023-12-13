@@ -7,10 +7,10 @@ $host = 'localhost';
 $username = 'root';
 $password = '';
 $dbname = 'dolphin_crm';
-$class1 = 'nt';
+$class1 = 'fl';
 $class2 = 'fl';
 $class3 = 'fl';
-$class4 = 'fl';
+$class4 = 'nt';
 
 
 
@@ -25,7 +25,9 @@ try {
 }
 
 
-if(session_status() == 'PHP_SESSION_ACTIVE'){
+
+
+if(session_status() == PHP_SESSION_ACTIVE){
 
     $id = $_SESSION['user_id'];
 
@@ -40,7 +42,7 @@ if(session_status() == 'PHP_SESSION_ACTIVE'){
 
 ?>
 
-<?php if(session_status() == 'PHP_SESSION_ACTIVE'){?>
+<?php if (isset($_SESSION['user_id'])): ?>
 
 <div class="heading" id="heading">
     <h1 id="hdr">Dashboard</h1>
@@ -61,30 +63,34 @@ if(session_status() == 'PHP_SESSION_ACTIVE'){
             <button class="<?= $class4; ?>" id="as" name="Assigned to me" onclick="assignedToMe()">Assigned to me</button>
         </div>
     </div>
-    <table>
-        <thead>
+    <?php if (empty($contacts)){?>
+        <p id="atm_msg">You have no contacts Assigned to you!</p>
+    <?php } else { ?>
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Company</th>
+                    <th>Type</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+            <?php foreach ($contacts as $contact): ?>
             <tr>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Company</th>
-                <th>Type</th>
-                <th></th>
+                <td><strong><?= $contact['title'].'. '.$contact['firstname'].' '.$contact['lastname']; ?></strong></td>
+                <td class="lgt"><?= $contact['email']; ?></td>
+                <td class="lgt"><?= $contact['company']; ?></td>
+                <td><p class="<?= $b = $contact['type']=='Sales Lead' ? "sl" : "sp" ?>"><?= strtoupper($contact['type']); ?></p></td>
+                <td><button class="view-btn" onclick="loadContactDetails()" data-contact-id="<?= $contact['id']; ?>">View</button></td>
             </tr>
-        </thead>
-        <tbody>
-        <?php foreach ($contacts as $contact): ?>
-        <tr>
-            <td><strong><?= $contact['title'].'. '.$contact['firstname'].' '.$contact['lastname']; ?></strong></td>
-            <td class="lgt"><?= $contact['email']; ?></td>
-            <td class="lgt"><?= $contact['company']; ?></td>
-            <td><p class="<?= $b = $contact['type']=='Sales Lead' ? "sl" : "sp" ?>"><?= strtoupper($contact['type']); ?></p></td>
-            <td><button class="view-btn" onclick="loadContactDetails()" data-contact-id="<?= $contact['id']; ?>">View</button></td>
-        </tr>
-        <?php endforeach; ?>
-    </tbody>
-    </table>
+            <?php endforeach; ?>
+        </tbody>
+        </table>
+    <?php }?>
 </div>
-<?php } ?>
+<?php endif; ?>
 
 
 

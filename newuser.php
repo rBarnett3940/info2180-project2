@@ -1,101 +1,104 @@
 <?php
+
+session_start();
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Retrieve form data
+    $firstName = $_POST['firstName'];
+    $lastName = $_POST['lastName'];
+    $pass = $_POST['password'];
+    $hashed_password = password_hash($pass, PASSWORD_BCRYPT);
+    $email = $_POST['email'];
+    $role = $_POST['Role'];
+
+    // Assuming you have a database connection established
     $host = 'localhost';
     $username = 'root';
     $password = '';
-    $dbname = 'dolphin_crm';
-    
-    $GLOBALS['conn']= new PDO("mysql:host=$host;dbname=$dbname;charset=utf8mb4", $username, $password);
+    $database = 'dolphin_crm';
 
-    
-    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-        
-        $fname = filter_input(INPUT_POST, 'fname', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-        $lname = filter_input(INPUT_POST, 'lname', FILTER_SANITIZE_STRING);
-        $email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
-        $role = $_POST['role'];
-    
-        if(validatePassword($_POST['password'])){
-            $hashPass = password_hash($_POST['password'], PASSWORD_DEFAULT);
-            addUser($fname, $lname, $hashPass, $email, $role);
-        }
-      }
-    function validatePassword($password){
-        return preg_match("/[A-Z]/", $password) && preg_match("/[0-9]/",$password) && strlen($password) > 8;
+    $conn = new mysqli($host, $username, $password, $database);
+
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
     }
 
-    
 
-    function addUser($fname, $lname, $hashPass, $email, $role) {
-        $created_at = date('Y-m-d H:i:s');
-        $stmt = $GLOBALS['conn']->prepare("INSERT INTO users (firstname, lastname, password, email, role, created_at) VALUES (:fname, :lname,:hashPass, :email, :role, :created_at)");
-                        
-        $stmt->bindParam(':fname', $fname, PDO::PARAM_STR);
-        $stmt->bindParam(':lname', $lname, PDO::PARAM_STR);
-        $stmt->bindParam(':hashPass', $hashPass, PDO::PARAM_STR);
-        $stmt->bindParam(':email', $email, PDO::PARAM_STR);
-        $stmt->bindParam(':role', $role, PDO::PARAM_STR);
-        $stmt->bindParam(':created_at', $created_at, PDO::PARAM_STR);
+    // Perform data validation and sanitation here if needed
 
-        
-        if ($stmt->execute()) {
-            echo("<script>alert('New user successfully added!');</script>");
-        }
-        else{
-            echo("<script>alert('An error has occured. New user was not added');</script>");
-        }
+    $id = $_SESSION['user_id'];
+    // Insert data into the users table
+    $sql = "INSERT INTO Users (firstname, lastname, password, email, role, created_at) 
+            VALUES ('$firstName', '$lastName', '$hashed_password', '$email', '$role', NOW())";
+
+    /*if ($conn->query($sql) === TRUE) {
+        echo "Record inserted successfully";
+    } else {
+        echo "Error: " . $sql . "<br>" . $conn->error;
+    }*/
+
+    /*if ($conn->query($sql) === TRUE) {
+        echo "Record inserted successfully";
+        $response = ["success" => true, "message" => "Record inserted successfully"];
+    } else {
+        echo "Error: " . $sql . "<br>" . $conn->error;
+        $response = ["success" => false, "message" => "Error: " . $sql . "<br>" . $conn->error];
     }
+
+
+    $conn->close();*/
+
+    
+    $response = ($conn->query($sql) === TRUE) ? "Record inserted successfully" : "Error!!!";
+
+    // Close the database connection
+    $conn->close();
+
+    // Return the response as JSON
+    header('Content-Type: application/json');
+    echo json_encode($response);
+
+    // Stop further execution
+    exit();
+
+}
 ?>
 
-<?php
-    session_start();
-?>
 
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-<meta name="viewport"content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="styles.css?v=<?php echo time(); ?>" type="text/css" />
-  <link rel='stylesheet' type='text/css' href='newuser.css'>
-</head>
-<body>
-<?php include 'sidebar.php'; ?>
-      <?php include 'sidebar.php'; ?>
+<?php if (isset($_SESSION['user_id'])): ?>
 
-      <section id = "loader">
-        <h1>New User</h1>
-        <form action="newUser.php">
-        <input type="hidden" id="csfrToken" value= "<?php echo $key; ?>" >
-            <label for="firstName">First Name
-                <input type="text">
-            </label>
-            <label for="lastName">Last Name
-                <input type="text">
-            </label>
-            <label for="email">Email
-                <input type="text">
-            </label>
-            <label for="password">Password
-                <input type="password">
-            </label>
-            <label for="roles">Role
-                <select name="roles" id="roleSelector">
-                    <option value="Member">Member</option>
-                    <option value="Admin">Admin</option>
-                </select>
-            </label>
-            <label for="title">Title
-                <select name="titles" id="titleSelector">
-                    <option value = "Mr.">Mr</option>
-                    <option value = "Mrs.">Mrs</opion>
-                    <option value = "Ms.">Ms</option>
-                    <option value = "Dr.">Dr</option>
-                    <option value = "Prof.">Prof</option>
-                </select>
-            </label>
-            <button id = "saveButton" type = "button">Save</button>
-        </form>
-    </section>
 
-</body>
-</html>
+<div class="form">
+
+    <form id="userForm" action="newuser.php" method="post">
+
+        <label for="firstName">First Name:</label>
+        <input type="text" id="firstName" name="firstName" required>
+        <br>
+
+        <label for="lastName">Last Name:</label>
+        <input type="text" id="lastName" name="lastName" required>
+        <br>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+        <br>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+        <br>
+
+        <label for="Role">Role:</label>
+        <select id="Role" name="Role">
+            <option value="Memnber">Member</option>
+            <option value="Admin">Admin</option>
+
+        </select>
+        <br>
+
+        <input type="button" value="Submit" onclick="submitForm2()">
+    </form>
+</div>
+
+
+<?php endif; ?>

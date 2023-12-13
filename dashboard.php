@@ -10,6 +10,7 @@
         <title>Dashboard</title>
         <link rel="stylesheet" href="styles.css?v=<?php echo time(); ?>" type="text/css" />
         <link rel="stylesheet" href="contact-styles.css?v=<?php echo time(); ?>" type="text/css" />
+        <link rel="stylesheet" href="create-contact.css?v=<?php echo time(); ?>" type="text/css" />
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     </head>
     <body>
@@ -245,6 +246,39 @@
 
 
 
+        function submitForm2() {
+            var form = document.getElementById('userForm');
+            var formData = new FormData(form);
+
+            fetch(form.action, {
+                method: 'POST',
+                body: formData
+            })
+                .then(response => {
+                    // Handle the response status
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    // Continue processing the response
+                    return response.text(); // or response.blob(), response.json(), etc.
+                })
+                .then(data => {
+                    // Handle the response data
+                    const response = JSON.parse(data);
+
+                    // Handle the response data
+                    alert(response.message);
+                    form.reset();
+                    // You can update the UI, show a success message, etc.
+                })
+                .catch(error => {
+                    // Handle errors
+                    console.error('Error:', error);
+                });
+        }
+
+
+
         function switchBtn() {
             var xhr = new XMLHttpRequest();
             var targetButton = event.target.closest('.switch-btn');
@@ -309,28 +343,21 @@
 
 
         function addUser() {
-            var xhr = new XMLHttpRequest();
+            var hr = new XMLHttpRequest();
             var url = "newuser.php";
-            console.log(url);
-
-
-            //document.getElementById("contact-table").style.border = 0;
-
-            xhr.onreadystatechange = function () {
-                if (xhr.readyState == XMLHttpRequest.DONE) {
-                    if (xhr.status == 200) {
-                        // Handle the response as needed
-                        var responseData = xhr.responseText;
-                        // You can update a div or perform other actions with the data
-                        document.getElementById('tb').innerHTML = responseData;
+            hr.onreadystatechange = function(){
+                if(hr.readyState == XMLHttpRequest.DONE){
+                    if(hr.status == 200){
+                        var tabl = hr.responseText;
+                        var result = document.getElementById("tb");
+                        result.innerHTML = tabl;
                     } else {
-                        alert("Error loading contact details!");
+                        alert("Error!!!")
                     }
                 }
             };
-
-            xhr.open("GET", url, true);
-            xhr.send();
+            hr.open("GET", url, true);
+            hr.send();
         }
 
 

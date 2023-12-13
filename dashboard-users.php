@@ -1,4 +1,8 @@
 <?php
+    session_start();
+?>
+
+<?php
 // Database connection
 $host = 'localhost';
 $username = 'root';
@@ -29,7 +33,7 @@ $users = $statement->fetchAll(PDO::FETCH_ASSOC);
 
 ?>
 
-<?php if(session_status() == 'PHP_SESSION_ACTIVE'){?>
+<?php if (isset($_SESSION['user_id'])): ?>
 
 <div class="heading" id="heading">
     <h1 id="hdr">Users</h1>
@@ -62,8 +66,7 @@ $users = $statement->fetchAll(PDO::FETCH_ASSOC);
     </table>
 </div>
 
-<?php } ?>
-
+<?php endif; ?>
 
 
 

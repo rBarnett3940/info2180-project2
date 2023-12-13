@@ -69,7 +69,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 ?>
 
 
-<?php if(session_status() == 'PHP_SESSION_ACTIVE'){?>
+<?php if (isset($_SESSION['user_id'])): ?>
 
 
 <div class="form">
@@ -96,11 +96,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <br>
 
         <label for="telephone">Telephone:</label>
-        <input type="tel" id="telephone" name="telephone">
+        <input type="tel" id="telephone" name="telephone" required>
         <br>
 
         <label for="company">Company:</label>
-        <input type="text" id="company" name="company">
+        <input type="text" id="company" name="company" required>
         <br>
 
         <label for="Type">Type:</label>
@@ -145,4 +145,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </div>
 
 
-<?php } ?>
+<?php endif; ?>

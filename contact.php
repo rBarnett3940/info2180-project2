@@ -1,3 +1,4 @@
+
 <?php
 // Database connection
 
@@ -116,6 +117,9 @@ $notes = $statement8->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 
+<?php if (isset($_SESSION['user_id'])): ?>
+
+
 <div class="tlevel">
     <div class="profile">
         <img src="user.png" alt="profile icon">
@@ -187,3 +191,6 @@ $notes = $statement8->fetchAll(PDO::FETCH_ASSOC);
             </div>
     </div>
 </div>
+
+
+<?php endif; ?>

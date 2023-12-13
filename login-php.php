@@ -12,6 +12,7 @@ $password_get = $_POST["password"];
 
 $email_filter = filter_var($email, FILTER_SANITIZE_STRING);
 $password_filter = filter_var($password_get, FILTER_SANITIZE_STRING);
+//$password_filter = password_hash($password_filter, PASSWORD_BCRYPT);
 
 // Database connection here
 $conn = new mysqli($host, $username, $password, $dbname);

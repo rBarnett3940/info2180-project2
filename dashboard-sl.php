@@ -1,4 +1,9 @@
 <?php
+    session_start();
+?>
+
+
+<?php
 
 // Database connection
 $host = 'localhost';
@@ -27,7 +32,7 @@ $contacts = $statement->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 
-<?php if(session_status() == 'PHP_SESSION_ACTIVE'){?>
+<?php if (isset($_SESSION['user_id'])): ?>
 
 
 <div class="heading" id="heading">
@@ -74,4 +79,4 @@ $contacts = $statement->fetchAll(PDO::FETCH_ASSOC);
 </div>
 
 
-<?php } ?>
+<?php endif; ?>
